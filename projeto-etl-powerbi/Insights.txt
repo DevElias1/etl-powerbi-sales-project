@@ -1,0 +1,107 @@
+1. Contexto Geral do Projeto
+
+  O projeto foi desenvolvido com três pilares:
+  1- Coleta dos arquivos,
+  2- ETL completo com Python(Pandas, Numpy) / (limpeza, padronização e cálculos),
+  3- Construção do dashboard no Power BI.
+  O objetivo foi apresentar uma visão clara do faturamento, lucratividade e comportamento das vendas ao longo dos meses.
+
+2. Destaques do ETL (Processo de Tratamento dos Dados)
+
+ *Padronização e limpeza dos dados*
+
+* Remoção de duplicidades.
+* Padronização dos nomes de produtos (eliminação de sufixos divergentes, correção de variações como “_Extra_21”, etc.).
+* Conversão de campos de texto para valores numéricos tratáveis.
+
+2.2 Cálculo do lucro estimado
+
+  Criada a métrica:
+  *Lucro = Valor de Venda – Custo do Produto*
+  Padronização das colunas numéricas assegurou consistência no cálculo.
+
+2.3 Extração de mês e período utilizando timestamp
+
+ O dataset utilizou *timestamp (segundos desde 1970)* em vez de datas tradicionais.
+ Isso permitiu:
+
+  * Extração rápida de mês e ano sem funções pesadas.
+  * Melhor desempenho do pipeline.
+  * Redução significativa do espaço ocupado pelos dados.
+
+2.4 Economia de armazenamento com Timestamp
+
+O uso de timestamp é extremamente vantajoso em grandes volumes de dados:
+
+* Campos datetime ocupam muito mais espaço (armazenam dia, mês, ano, hora, minuto, segundo, fuso, formatação).
+* O timestamp armazena apenas *um número inteiro*.
+* Inteiros são mais leves, comprimem melhor e são mais rápidos de processar.
+* Em bases massivas (milhões de linhas), isso gera:
+
+  *Economia direta de armazenamento*,
+  *Maior performance nos bancos de dados*,
+  *Redução de custo computacional*.
+
+Ou seja, foi aplicada uma escolha técnica de pipelines profissionais de Big Data.
+
+ *Insights*                  
+
+1. Visão Geral do Negócio
+
+*Total de Vendas: R$ *120,93 mil*.
+*Lucro Estimado Total: –R$ *90,74 mil*.
+* O negócio vende bem, porém está operando com margem negativa em todo o período analisado.
+
+
+2. Distribuição das Vendas por Produto
+
+(Gráfico: *Sum of Total Sales by Product*)
+
+* As vendas estão *extremamente pulverizadas*, cada item representando aproximadamente *3,33%*.
+* Não existe um produto campeão de vendas.
+
+3. Vendas Mensais
+
+(Gráfico de barras: *Sum of Total Sales by Month*)
+
+ Meses *2 e 5* são os melhores períodos, superando 12k em vendas.
+ Meses *7 e 9* apresentam quedas relevantes, abaixo de 8k.
+ Existe uma sazonalidade clara, com alternância entre picos e quedas.
+
+4. Lucro Estimado Mensal
+
+(Gráfico de linha: *Sum of Estimated Profit by Month*)
+
+ O lucro está negativo em todos os meses.
+ Mês 6 apresenta o pior prejuízo (~–20k).
+ Mês 12 apresenta a melhor recuperação.
+
+5. Relação Estratégica: Vendas × Lucro*
+
+ Em vários meses, mais vendas significam mais prejuízo — problema claro de margem.
+ Indica que:
+
+  * Custo do produto pode estar acima do preço de venda.
+  * Markup inadequado.
+  * Operação sem margem mínima sustentável.
+
+  Isso é um alerta imediato para redefinição de preços, renegociação com fornecedores ou redução de custos.
+
+
+ *Conclusões Executivas para a Diretoria*
+
+ Há faturamento, mas não há margem, a empresa está queimando dinheiro mesmo vendendo bem,
+o portfólio é extenso demais e não tem um líder de vendas.
+ Isso reduz eficiência comercial e dificulta estratégias de escala, a sazonalidade existe, mas o problema é estrutural.
+ Mesmo nos meses fortes, o lucro permanece negativo. O uso de timestamp trouxe economia e eficiência real ao projeto.
+
+ Redução do tamanho da base.
+ Processamento mais rápido.
+ Menos custo computacional.
+ Pipeline ETL mais leve e escalável.
+
+
+“O pipeline de dados foi otimizado com o uso de timestamp, garantindo alta eficiência e economia de espaço.
+ Mesmo com R$120,93K em vendas, todos os produtos apresentam margem negativa.
+ O negócio possui sazonalidade acentuada, portfólio sem destaque e estrutura de custos deficitária, exigindo revisão urgente da estratégia comercial e de pricing.”
+
